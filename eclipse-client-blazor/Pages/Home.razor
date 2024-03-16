@@ -1,0 +1,81 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<table>
+    <tr>
+        <td>Latitude:</td>
+        <td>
+            <InputNumber @bind-Value="latitude" />
+        </td>
+    </tr>
+    <tr>
+        <td>Longitude:</td>
+        <td>
+            <InputNumber @bind-Value="longitude" />
+        </td>
+    </tr>
+    <tr>
+        <td>Daylight savings?</td>
+        <td>
+            <InputCheckbox @bind-Value="isDaylightSavings" />
+        </td>
+    </tr>
+    <tr>
+        <td>Zone correction hours:</td>
+        <td>
+            <InputNumber @bind-Value="zoneCorrectionHours" />
+        </td>
+    </tr>
+    <tr>
+        <td>Date:</td>
+        <td>
+            <InputDate @bind-Value="calcDate" />
+        </td>
+    </tr>
+</table>
+
+<p>
+    <button class="btn btn-primary" @onclick="Calculate">Calculate</button>
+</p>
+
+<h2>Results</h2>
+
+<h3>Occurrence</h3>
+
+<table>
+    <tr>
+        <td>Status:</td>
+        <td>@occurrence.Status</td>
+    </tr>
+    <tr>
+        <td>Date:</td>
+        <td>@occurrence.EventDateMonth/@occurrence.EventDateDay/@occurrence.EventDateYear</td>
+    </tr>
+</table>
+
+<h3>Circumstances</h3>
+
+<table>
+    <tr>
+        <td>Certain date:</td>
+        <td>@circumstances.SolarEclipseCertainDateMonth/@circumstances.SolarEclipseCertainDateDay/@circumstances.SolarEclipseCertainDateYear
+        </td>
+    </tr>
+    <tr>
+        <td>First contact:</td>
+        <td>@circumstances.FormattedFirstContact</td>
+    </tr>
+    <tr>
+        <td>Mid eclipse:</td>
+        <td>@circumstances.FormattedMidEclipse</td>
+    </tr>
+    <tr>
+        <td>Last contact:</td>
+        <td>@circumstances.FormattedLastContact</td>
+    </tr>
+    <tr>
+        <td>Eclipse magnitude:</td>
+        <td>@circumstances.FormattedEclipseMagnitude</td>
+    </tr>
+</table>
