@@ -174,7 +174,21 @@ namespace eclipse_client_blazor.Pages
             {
                 eclipseMagnitude = value;
 
-                formattedEclipseMagnitude = (eclipseMagnitude >= 1) ? "100 %" : $"{eclipseMagnitude * 100} %";
+                switch (eclipseMagnitude)
+                {
+                    case >= 1:
+                        formattedEclipseMagnitude = "100%";
+                        break;
+                    case -99:
+                        formattedEclipseMagnitude = "Invalid";
+                        break;
+                    case >= 0:
+                        if (eclipseMagnitude < 1) formattedEclipseMagnitude = $"{eclipseMagnitude * 100} %";
+                        break;
+                    default:
+                        formattedEclipseMagnitude = "Unknown";
+                        break;
+                }
             }
         }
 
@@ -182,23 +196,44 @@ namespace eclipse_client_blazor.Pages
 
         private void UpdateFormattedFirstContact()
         {
-            DateTime time = new DateTime(solarEclipseCertainDateYear, solarEclipseCertainDateMonth, (int)solarEclipseCertainDateDay, (int)utFirstContactHour, (int)utFirstContactMinutes, 0);
+            try
+            {
+                DateTime time = new DateTime(solarEclipseCertainDateYear, solarEclipseCertainDateMonth, (int)solarEclipseCertainDateDay, (int)utFirstContactHour, (int)utFirstContactMinutes, 0);
 
-            formattedFirstContact = time.ToString("h:mm tt", CultureInfo.InvariantCulture);
+                formattedFirstContact = time.ToString("h:mm tt", CultureInfo.InvariantCulture);
+            }
+            catch
+            {
+                formattedFirstContact = "Invalid";
+            }
         }
 
         private void UpdateFormattedMidEclipse()
         {
-            DateTime time = new DateTime(solarEclipseCertainDateYear, solarEclipseCertainDateMonth, (int)solarEclipseCertainDateDay, (int)utMidEclipseHour, (int)utMidEclipseMinutes, 0);
+            try
+            {
+                DateTime time = new DateTime(solarEclipseCertainDateYear, solarEclipseCertainDateMonth, (int)solarEclipseCertainDateDay, (int)utMidEclipseHour, (int)utMidEclipseMinutes, 0);
 
-            formattedMidEclipse = time.ToString("h:mm tt", CultureInfo.InvariantCulture);
+                formattedMidEclipse = time.ToString("h:mm tt", CultureInfo.InvariantCulture);
+            }
+            catch
+            {
+                formattedMidEclipse = "Invalid";
+            }
         }
 
         private void UpdateFormattedLastContact()
         {
-            DateTime time = new DateTime(solarEclipseCertainDateYear, solarEclipseCertainDateMonth, (int)solarEclipseCertainDateDay, (int)utLastContactHour, (int)utLastContactMinutes, 0);
+            try
+            {
+                DateTime time = new DateTime(solarEclipseCertainDateYear, solarEclipseCertainDateMonth, (int)solarEclipseCertainDateDay, (int)utLastContactHour, (int)utLastContactMinutes, 0);
 
-            formattedLastContact = time.ToString("h:mm tt", CultureInfo.InvariantCulture);
+                formattedLastContact = time.ToString("h:mm tt", CultureInfo.InvariantCulture);
+            }
+            catch
+            {
+                formattedLastContact = "Invalid";
+            }
         }
     }
 }
